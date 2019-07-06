@@ -26,7 +26,7 @@ router.post('/login',function(req,res){
     //var str=bnf.toString();
     //获取post请求数据的对象
     var obj=req.body;
-   // console.log(obj);
+    //console.log(obj);
     if(!obj.phone){
         res.send({code:401,msg:'用户名为空'});
         return;
@@ -38,7 +38,7 @@ router.post('/login',function(req,res){
     //执行SQL语句  查询所有用户名和密码 匹配         upwd=md5(?)  密码加密
     pool.query('SELECT * FROM users WHERE phone=? AND upwd=?',[obj.phone,obj.upwd],function(err,result){
         if(err) throw err;
-      //  console.log(result[0].id);
+        console.log('当前登录用户ID是：'+result[0].id);
         //判断数组是否大于0，结果result是数组，大于0就登录成功，数组等于0就是登录失败
         if(result.length>0){
             req.session.uid=result[0].id;    //将当前登录用户uid保存session对象 
@@ -52,12 +52,12 @@ router.post('/login',function(req,res){
 router.get("/cart",(req,res)=>{
     //1:参数(无参数)
     var uid = req.session.uid;
-    console.log(uid+'niha');
+    console.log(uid+'niha');    //登录后
     if(!uid){
       res.send({code:-1,msg:"请先登录！"});
       return;
     }
-    //2:sql
+    //2:sql  //传一个uid =  一个值 1  数据库只有1
     var sql = "SELECT id,img_url,title,price,count FROM wy_cart WHERE uid = ?";
     pool.query(sql,[uid],(err,result)=>{
       console.log(result)

@@ -47,6 +47,8 @@ const userRouter=require('../routes/user.js');
 const details=require("../routes/details");
 /*引入商品详情路由模块*/
 const product=require("../routes/product");
+/*引入购物车路由模块*/
+const Cart=require("../routes/cart");
 
 //(使用内置中间件)把静态资源托管到指定目录
 server.use(express.static('../public'));
@@ -60,4 +62,5 @@ server.use('/index',index);
 server.use("/product_list",details);
 
 /*使用商品详情路由模块*/
-server.use("/product",product);
+server.use("/shopping",Cart);
+
