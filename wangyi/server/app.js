@@ -51,7 +51,7 @@ const product=require("../routes/product");
 const Cart=require("../routes/cart");
 
 //(使用内置中间件)把静态资源托管到指定目录
-server.use(express.static('../public'));
+//server.use(express.static('../public'));
 //使用用户路由器 挂载： /user http://127.0.0.1:8080/user
 server.use('/user',userRouter);
 
